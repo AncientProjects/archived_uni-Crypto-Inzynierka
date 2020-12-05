@@ -1,0 +1,38 @@
+{
+  "exp": {
+    "name": "lstm_test_from_config",
+    "type": "full"
+  },
+  "data_loader": {
+    "name": "lstm_data_loader.LSTMDataLoader",
+    "window_size": 30,
+    "sequences": 10,
+    "split_time": 3500
+  },
+  "model":{
+    "name": "lstm_test_model.LSTMTestModel",
+    "learning_rate": 1e-8,
+    "momentum": 0.9,
+    "optimizer": "adam",
+    "load_model_path": "experiments/2020-10-25/lstm_test_from_config/checkpoints/lstm_test_from_config-104-0.01675.hdf5"
+  },
+  "trainer":{
+    "name": "lstm_test_trainer.LSTMTestModelTrainer",
+    "num_epochs": 250,
+    "batch_size": 64,
+    "validation_split": 0.25,
+    "verbose_training": true
+  },
+  "callbacks":{
+    "checkpoint_monitor": "val_loss",
+    "checkpoint_mode": "min",
+    "checkpoint_save_best_only": true,
+   "checkpoint_save_weights_only": false,
+    "checkpoint_verbose": true,
+    "tensorboard_write_graph": true,
+    "early_stopping_patience": 50
+  },
+  "forecasts": {
+    "name": "lstm_test_forecasts.LSTMTestForecasts"
+  }
+}

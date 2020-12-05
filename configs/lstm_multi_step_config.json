@@ -1,0 +1,39 @@
+{
+  "exp": {
+    "name": "experimental_config",
+    "type": "full"
+  },
+  "data_loader": {
+    "name": "experimental_data_loader.ExperimentalDataLoader",
+    "window_size": 5,
+    "sequences": 1,
+    "split_time": 9500,
+    "test_len" : 100
+  },
+  "model":{
+    "name": "experimental_model.ExperimentalModel",
+    "learning_rate": 1e-4,
+    "momentum": 0.85,
+    "optimizer": "adam",
+    "load_model_path": "experiments/2020-12-04/experimental_config/checkpoints/experimental_config-502-0.01410.hdf5"
+  },
+  "trainer":{
+    "name": "experimental_trainer.ExperimentalTrainer",
+    "num_epochs": 4000,
+    "batch_size": 32,
+    "validation_split": 0.1,
+    "verbose_training": true
+  },
+  "callbacks":{
+    "checkpoint_monitor": "val_loss",
+    "checkpoint_mode": "min",
+    "checkpoint_save_best_only": true,
+   "checkpoint_save_weights_only": false,
+    "checkpoint_verbose": true,
+    "tensorboard_write_graph": true,
+    "early_stopping_patience": 100
+  },
+  "forecasts": {
+    "name": "experimental_forecasts.ExperimentalForecasts"
+  }
+}
