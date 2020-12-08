@@ -1,17 +1,20 @@
+import numpy as np
 from pandas import Series, DataFrame, concat
 from sklearn.preprocessing import MinMaxScaler
-import numpy as np
 
 from data_loader.data_transformer.split_to_train_and_test import SplitToTrainAndTest
+from data_loader.data_transformer.prepare_data import PrepareData
 
 
 class DataTransformer(object):
     def __init__(self, series_df, config):
-        self.close_raw_all = series_df['close']
-        self.time_values = series_df['time']
+        self.config = config
+        self.prepare_data = PrepareData(config, series_df)
+        # self.close_raw_all = series_df['close']
+        # self.time_values = series_df['time']
         # raw, real values straight from data
         self.raw_series = self.close_raw_all
-        self.config, self.test_len, self.window_len, self.sequence_len = self.load_from_config(config)
+        self.test_len, self.window_len, self.sequence_len = self.load_from_config()
         # split field is just an integer to split all raw values to train and test
         self.split = self.test_len - self.window_len
         self.test_time = self.time_values[-self.test_len + self.window_len:]
@@ -24,11 +27,10 @@ class DataTransformer(object):
         self.scaler, self.train_transformed, self.test_transformed = self.transform_train_and_test_data()
         self.test_x, self.test_y = self.split_and_reshape(self.test_transformed)
 
-    def load_from_config(self, config):
-        return config, \
-               config.data_loader.test_len, \
-               config.data_loader.window_size, \
-               config.data_loader.sequences
+    def load_from_config(self):
+        return self.config.data_loader.test_len, \
+               self.config.data_loader.window_size, \
+               self.config.data_loader.sequences
 
     def transform_train_and_test_data(self):
         diff_series = self.diff_and_supervised(self.raw_series)
@@ -38,7 +40,6 @@ class DataTransformer(object):
 
     def transform_train_data(self, supervised_values):
         # Series of tuples (index, value) to ndarray of values
-        # supervised_values = self.diff_and_supervised(self.raw_split.train)
 
         # scaler fit on supervised train ndarray of shape = (num_of_vectors, window_len + sequence_len)
         scaler, train_transformed = self.scale_train(supervised_values)
@@ -46,7 +47,6 @@ class DataTransformer(object):
 
     def transform_test_data(self, supervised_values, scaler):
         # Series of tuples (index, value) to ndarray of values
-        # supervised_values = self.diff_and_supervised(self.raw_split.test)
 
         # transform differenced and supervised test values using scaler fit to supervised train values
         test_transformed = self.scale_test(supervised_values, scaler)
@@ -118,7 +118,7 @@ class DataTransformer(object):
     def reverse_transform(self, forecasts):
         test_remerged = self.reverse_split(forecasts)
         rescaled = self.scaler.inverse_transform(test_remerged)
-        return rescaled[:, -1]
+        return rescaled[:, -self.sequence_len:]
 
     def reverse_split(self, forecasts):
         test_x = self.test_x
@@ -135,6 +135,9 @@ class DataTransformer(object):
 
     def get_raw(self):
         return self.raw_split.train, self.raw_split.test
+
+    def get_series_raw_values(self):
+        return self.raw_series
 
     def get_raw_train_pandas_series(self):
         return self.raw_split.train

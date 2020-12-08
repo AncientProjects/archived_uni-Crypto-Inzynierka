@@ -1,21 +1,21 @@
 {
   "exp": {
-    "name": "experimental_config",
+    "name": "lstm_multi_step",
     "type": "full"
   },
   "data_loader": {
     "name": "experimental_data_loader.ExperimentalDataLoader",
-    "window_size": 5,
-    "sequences": 1,
+    "window_size": 10,
+    "sequences": 5,
     "split_time": 9500,
     "test_len" : 100
   },
   "model":{
-    "name": "experimental_model.ExperimentalModel",
+    "name": "lstm_multi_step_model.LSTMMultiStepModel",
     "learning_rate": 1e-4,
     "momentum": 0.85,
     "optimizer": "adam",
-    "load_model_path": "experiments/2020-12-04/experimental_config/checkpoints/experimental_config-502-0.01410.hdf5"
+    "load_model_path": "experiments/2020-12-05/lstm_multi_step/checkpoints/lstm_multi_step-05-0.01442.hdf5"
   },
   "trainer":{
     "name": "experimental_trainer.ExperimentalTrainer",

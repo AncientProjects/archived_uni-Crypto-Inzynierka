@@ -1,7 +1,8 @@
-from utils.plot import plot_series
-from pandas import read_csv
 import pandas as pd
+
 from data.data_selector import DataSelector, Dataset
+from utils.plot import plot_series
+
 
 def main():
     series_df = DataSelector.data_dict[Dataset.DEFAULT_BTC_DAY_2k]

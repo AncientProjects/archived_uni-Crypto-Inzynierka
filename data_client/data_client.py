@@ -2,7 +2,7 @@ import csv
 
 import requests
 
-from data_client.data_client_dicts import base_path_dict, request_params_dict
+from data_client import data_client_dicts
 
 
 class DataClient(object):
@@ -10,8 +10,8 @@ class DataClient(object):
     def __init__(self):
         self.request = None
         self.data_dictionary = {}
-        self.base_path = base_path_dict['DAY']
-        self.params_dict = request_params_dict['default']
+        self.base_path = data_client_dicts.base_path_dict['DAY']
+        self.params_dict = data_client_dicts.request_params_dict['default']
         self.filename = self.set_filename()
         self.fieldnames = self.set_fieldnames()
 

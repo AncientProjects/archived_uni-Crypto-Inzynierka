@@ -1,8 +1,6 @@
 from base.base_data_loader import BaseDataLoader
 from data.data_selector import DataSelector, Dataset
 from data_loader.data_transformer.data_transformer import DataTransformer
-from statsmodels.tsa.stattools import adfuller
-import pandas as pd
 
 
 class ExperimentalDataLoader(BaseDataLoader):
@@ -18,6 +16,9 @@ class ExperimentalDataLoader(BaseDataLoader):
 
     def get_test_plot_values(self):
         return self.test_raw.values
+
+    def get_test_values_for_forecast(self):
+        return self.data_transformer.get_series_raw_values()[-len(self.test_raw)-1:].values
 
     def get_train_data(self):
         return self.train_x, self.train_y

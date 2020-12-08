@@ -1,20 +1,5 @@
-from matplotlib import pyplot as plt
 import matplotlib.ticker as ticker
-import matplotlib as mpl
-
-
-def plot_no_model_results(time_test, x_test, forecast, name):
-    if name == "naive_config":
-        plot_naive(time_test, x_test, forecast)
-    elif name == "moving_average_config":
-        plot_real_and_forecasts(time_test, x_test, forecast)
-
-
-def plot_naive(time_test, x_test, forecast):
-    plt.figure(figsize=(10, 6))
-    plot_series(time_test, x_test, start=0, end=150, label="Series")
-    plot_series(time_test, forecast, start=1, end=151, label="Forecast")
-    plt.show()
+from matplotlib import pyplot as plt
 
 
 def plot_series(time, series, format="-", start=0, end=None, label=None):
@@ -41,9 +26,19 @@ def plot_better(values, start=0, end=None, x_label='', y_label='', legend=''):
 
 def plot_real_and_forecasts(time_test, raw_test, forecasts, format="-", start=70, end=None, label1="Series",
                             label2="Forecast"):
+    sequence_len = forecasts.shape[1]
+    forecast_index = int(start/sequence_len)
     fig, ax = plt.subplots()
     ax.plot(time_test[start:end], raw_test[start:end], format, label=label1)
-    ax.plot(time_test[start:end], forecasts[start:end], format, label=label2)
+    if sequence_len == 1:
+        ax.plot(time_test[start:end], forecasts[start:end], format, label=label2)
+    else:
+        for i in range(forecast_index, len(forecasts)):
+            off_s = i * sequence_len
+            off_e = off_s + sequence_len
+            xaxis = [x for x in time_test[off_s:off_e]]
+            yaxis = forecasts[i]
+            ax.plot(xaxis, yaxis, format, label=label2 if i == forecast_index else '', color='red')
 
     plt.setp(ax.get_xticklabels(), rotation=30, ha='right', rotation_mode="anchor")
     plt.xticks(fontsize=10)

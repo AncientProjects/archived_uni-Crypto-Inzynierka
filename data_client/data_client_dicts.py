@@ -60,7 +60,7 @@ request_params_dict = {
         'toTs': 1431907200,
         'limit': 2000
     },
-    'default': {    # default - BTC-USD-2000-DAYkuj.csv
+    'default': {  # default - BTC-USD-2000-DAYkuj.csv
         'tryConversion': 'true',
         'e': 'CCCAGG',
         'api_key': api_key,

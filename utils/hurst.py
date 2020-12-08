@@ -1,8 +1,6 @@
-# from pandas_datareader import data
-# import datetime
 from math import sqrt
-from numpy import cumsum, std, subtract, polyfit, log
-# from numpy.random import randn
+
+from numpy import std, subtract, polyfit, log
 
 
 def hurst(ts):

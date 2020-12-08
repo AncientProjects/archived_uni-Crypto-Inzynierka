@@ -8,7 +8,7 @@
     "window_size": 5,
     "sequences": 1,
     "split_time": 9500,
-    "test_len" : 200
+    "test_len" : 100
   },
   "model":{
     "name": "experimental_model.ExperimentalModel",

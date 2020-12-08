@@ -6,9 +6,9 @@ from base.base_model import BaseModel
 keras = tf.keras
 
 
-class ExperimentalModel(BaseModel):
+class LSTMMultiStepModel(BaseModel):
     def __init__(self, train_data, config):
-        super(ExperimentalModel, self).__init__(train_data, config)
+        super(LSTMMultiStepModel, self).__init__(train_data, config)
         self.window_size = self.config.data_loader.window_size
         self.learning_rate = self.config.model.learning_rate
         self.momentum = self.config.model.momentum
@@ -17,8 +17,9 @@ class ExperimentalModel(BaseModel):
 
     def build_model(self):
         self.model = tf.keras.models.Sequential()
-        self.model.add(tf.keras.layers.LSTM(10, input_shape=(self.window_size, 1)))
+        self.model.add(tf.keras.layers.LSTM(10, return_sequences=True, input_shape=(self.window_size, 1)))
         self.model.add(tf.keras.layers.Dropout(0.1))
+        self.model.add(tf.keras.layers.LSTM(10, input_shape=(self.window_size, 1)))
         self.model.add(tf.keras.layers.Dense(self.sequence_size))
 
         self.model.compile(
