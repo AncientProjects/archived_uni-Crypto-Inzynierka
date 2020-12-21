@@ -2,7 +2,6 @@
 <project version="4">
   <component name="PylintConfigService">
     <option name="customPylintPath" value="C:\Users\asdf1234\anaconda3\envs\tgpu\Scripts\pylint.exe" />
-    <option name="pylintArguments" value="--errors-only" />
     <option name="pylintrcPath" value="E:\a__pajton_prodzekts\cryptoinzynierka\Crypto-Inzynierka\pylintrc" />
   </component>
 </project>

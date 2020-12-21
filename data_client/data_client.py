@@ -6,7 +6,6 @@ from data_client import data_client_dicts
 
 
 class DataClient(object):
-
     def __init__(self):
         self.request = None
         self.data_dictionary = {}

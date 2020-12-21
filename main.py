@@ -2,8 +2,8 @@ import sys
 
 import tensorflow as tf
 
-from mode.forecast import Forecast
-from mode.train import Train
+from mode import forecast
+from mode import train
 from utils import utils
 from utils.config import process_config
 
@@ -16,11 +16,9 @@ def main():
         config = process_config(args.config)
 
         if args.mode == 'train':
-            train = Train(config)
-            train.train()
+            train.Train(config).train()
         elif args.mode == 'forecast':
-            forecast = Forecast(config)
-            forecast.forecast()
+            forecast.Forecast(config).forecast()
 
     except Exception as e:
         print(e)

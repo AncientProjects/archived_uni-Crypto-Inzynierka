@@ -5,9 +5,9 @@ from tensorflow.keras.callbacks import ModelCheckpoint, TensorBoard, EarlyStoppi
 from base.base_trainer import BaseTrain
 
 
-class ExperimentalTrainer(BaseTrain):
+class LSTMSingleOutputTrainer(BaseTrain):
     def __init__(self, model, train_data, config):
-        super(ExperimentalTrainer, self).__init__(model, train_data, config)
+        super(LSTMSingleOutputTrainer, self).__init__(model, train_data, config)
         self.callbacks = []
         self.loss = []
         self.acc = []

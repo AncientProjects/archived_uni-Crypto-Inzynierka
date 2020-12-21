@@ -1,18 +1,15 @@
-import tensorflow as tf
+import tensorflow
 from tensorflow.keras.models import load_model
 
 from base.base_model import BaseModel
 
+tf = tensorflow
 keras = tf.keras
 
 
 class LSTMMultiStepModel(BaseModel):
     def __init__(self, train_data, config):
         super(LSTMMultiStepModel, self).__init__(train_data, config)
-        self.window_size = self.config.data_loader.window_size
-        self.learning_rate = self.config.model.learning_rate
-        self.momentum = self.config.model.momentum
-        self.sequence_size = self.config.data_loader.sequences
         self.build_model()
 
     def build_model(self):
@@ -25,8 +22,6 @@ class LSTMMultiStepModel(BaseModel):
         self.model.compile(
             loss='mse',
             optimizer=self.config.model.optimizer,
-            # optimizer=keras.optimizers.Adam(learning_rate=self.learning_rate, beta_1=self.momentum, epsilon=1e-10),
-            # optimizer=keras.optimizers.SGD(self.learning_rate, self.momentum),
             metrics=['mae'],
         )
         print(self.model.summary())
@@ -35,3 +30,6 @@ class LSTMMultiStepModel(BaseModel):
         self.model = load_model(
             filepath=self.config.model.load_model_path,
             custom_objects=None, compile=True)
+
+# optimizer=keras.optimizers.Adam(learning_rate=self.learning_rate, beta_1=self.momentum, epsilon=1e-10),
+# optimizer=keras.optimizers.SGD(self.learning_rate, self.momentum),

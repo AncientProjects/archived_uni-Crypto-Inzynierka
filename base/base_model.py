@@ -2,6 +2,10 @@ class BaseModel(object):
     def __init__(self, train_data, config):
         self.train_data = train_data
         self.config = config
+        self.window_size = self.config.data_loader.window_size
+        self.learning_rate = self.config.model.learning_rate
+        self.momentum = self.config.model.momentum
+        self.sequence_size = self.config.data_loader.sequences
         self.model = None
 
     # save function that saves the checkpoint in the path defined in the config file
@@ -21,6 +25,9 @@ class BaseModel(object):
         print("Loading model checkpoint {} ...\n".format(checkpoint_path))
         self.model.load(checkpoint_path)
         print("Model loaded")
+
+    def load_model(self):
+        raise NotImplementedError
 
     def build_model(self):
         raise NotImplementedError

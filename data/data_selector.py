@@ -2,8 +2,6 @@ from enum import Enum
 
 from pandas import read_csv
 
-from utils.utils import load_two_datasets
-
 
 class Dataset(Enum):
     TESTERINO = 1
@@ -13,8 +11,15 @@ class Dataset(Enum):
 
 
 class DataSelector(object):
-    data_dict = {Dataset.TESTERINO: read_csv("data/testerino.csv"),
-                 Dataset.TWO_DATASETS: load_two_datasets("data/bitcoin_1minute_1-1000.csv",
-                                                         "data/bitcoin_1minute_1001-1201.csv"),
-                 Dataset.SMALL_BTC: read_csv("data/BTCUSD100MINUT.csv"),
-                 Dataset.DEFAULT_BTC_DAY_2k: read_csv("data/BTC-USD-2000-DAYkuj.csv")}
+    testerino = "data/testerino.csv"
+    data_btc1 = "data/bitcoin_1minute_1-1000.csv"
+    data_btc2 = "data/bitcoin_1minute_1001-1201.csv"
+    small_btc = "data/BTCUSD100MINUT.csv"
+    default_btc = "data/BTC-USD-2000-DAYkuj.csv"
+
+    data_dict = {
+        Dataset.TESTERINO: read_csv(testerino),
+        Dataset.TWO_DATASETS: (read_csv(data_btc1), read_csv(data_btc2)),
+        Dataset.SMALL_BTC: read_csv(small_btc),
+        Dataset.DEFAULT_BTC_DAY_2k: read_csv(default_btc)
+    }

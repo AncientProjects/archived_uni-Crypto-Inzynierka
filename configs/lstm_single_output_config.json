@@ -1,0 +1,37 @@
+{
+  "exp": {
+    "name": "lstm_single_output_config"
+  },
+  "data_loader": {
+    "name": "lstm_single_output_data_loader.LSTMSingleOutputDataLoader",
+    "window_size": 5,
+    "sequences": 1,
+    "test_len": 100
+  },
+  "model": {
+    "name": "lstm_single_output_model.LSTMSingleOutputModel",
+    "learning_rate": 1e-4,
+    "momentum": 0.85,
+    "optimizer": "adam",
+    "load_model_path": "experiments/2020-12-13/lstm_single_output_config/checkpoints/lstm_single_output_config-118-0.01428.hdf5"
+  },
+  "trainer": {
+    "name": "lstm_single_output_trainer.LSTMSingleOutputTrainer",
+    "num_epochs": 4000,
+    "batch_size": 32,
+    "validation_split": 0.1,
+    "verbose_training": true
+  },
+  "callbacks": {
+    "checkpoint_monitor": "val_loss",
+    "checkpoint_mode": "min",
+    "checkpoint_save_best_only": true,
+    "checkpoint_save_weights_only": false,
+    "checkpoint_verbose": true,
+    "tensorboard_write_graph": true,
+    "early_stopping_patience": 100
+  },
+  "forecasts": {
+    "name": "lstm_single_output_forecasts.LSTMSingleOutputForecasts"
+  }
+}

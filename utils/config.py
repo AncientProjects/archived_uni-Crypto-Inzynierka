@@ -5,6 +5,20 @@ import time
 from dotmap import DotMap
 
 
+def process_config(json_file):
+    """
+    Process config namespace
+    :param json_file:
+    :return: config(namespace)
+    """
+    config, _ = get_config_from_json(json_file)
+    config.callbacks.tensorboard_log_dir = os.path.join("experiments", time.strftime("%Y-%m-%d\\", time.localtime()),
+                                                        config.exp.name, "logs\\")
+    config.callbacks.checkpoint_dir = os.path.join("experiments", time.strftime("%Y-%m-%d\\", time.localtime()),
+                                                   config.exp.name, "checkpoints\\")
+    return config
+
+
 def get_config_from_json(json_file):
     """
     Get the config from a json file
@@ -19,10 +33,3 @@ def get_config_from_json(json_file):
     config = DotMap(config_dict)
 
     return config, config_dict
-
-
-def process_config(json_file):
-    config, _ = get_config_from_json(json_file)
-    config.callbacks.tensorboard_log_dir = os.path.join("experiments", time.strftime("%Y-%m-%d\\", time.localtime()), config.exp.name, "logs\\")
-    config.callbacks.checkpoint_dir = os.path.join("experiments", time.strftime("%Y-%m-%d\\", time.localtime()), config.exp.name, "checkpoints\\")
-    return config
