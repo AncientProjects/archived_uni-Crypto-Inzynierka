@@ -5,25 +5,24 @@
   },
   "data_loader": {
     "name": "lstm_single_output_data_loader.LSTMSingleOutputDataLoader",
-    "window_size": 10,
+    "window_size": 5,
     "sequences": 1,
     "test_len": 100,
-    "k_fold": 5,
+    "k_fold": 4,
     "recursive": false
   },
   "model": {
-    "name": "lstm_single_output_model.LSTMSingleOutputModel",
-    "learning_rate": 1e-8,
+    "name": "lstm_single_output_model3.LSTMSingleOutputModel3",
+    "learning_rate": 5e-5,
     "momentum": 0.9,
     "optimizer": "adam",
-    "load_model_path": "experiments/2021-01-15/lstm_single_output_config/checkpoints/lstm_single_output_config-273-0.00024.hdf5",
-    "load_model_path_2d": "experiments/2021-01-17/lstm_single_output_config/checkpoints/lstm_single_output_config-291-0.00029.hdf5"
+    "load_model_path": "experiments/2021-01-02/lstm_single_output_config/checkpoints/lstm_single_output_config-79-0.00352.hdf5"
   },
   "trainer": {
     "name": "lstm_trainer.LSTMTrainer",
-    "num_epochs": 4000,
-    "batch_size": 128,
-    "validation_split": 0.1,
+    "num_epochs": 80,
+    "batch_size": 256,
+    "validation_split": 0.3,
     "verbose_training": true,
     "early_stopping": true,
     "lr_scheduler": false,
@@ -37,7 +36,7 @@
     "checkpoint_save_weights_only": false,
     "checkpoint_verbose": true,
     "tensorboard_write_graph": true,
-    "early_stopping_patience": 100
+    "early_stopping_patience": 20
   },
   "forecasts": {
     "name": "lstm_single_output_forecasts.LSTMSingleOutputForecasts"

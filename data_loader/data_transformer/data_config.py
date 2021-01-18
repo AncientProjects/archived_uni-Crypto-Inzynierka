@@ -1,12 +1,9 @@
 class DataConfig(object):
-    def __init__(self, config):
-        self.test_len = config.data_loader.test_len
+    def __init__(self, config, series_len):
+        self.series_len = series_len
         self.window_size = config.data_loader.window_size
         self.sequence_len = config.data_loader.sequences
-
-    # split field is just an integer to split all raw values to train and test
-    def get_split(self):
-        return self.test_len - self.window_size
-
-    def get_window_and_sequence(self):
-        return self.window_size, self.sequence_len
+        self.k = config.data_loader.k_fold
+        self.recursive = config.data_loader.recursive
+        if self.recursive:
+            self.recursive_seq = config.data_loader.recursive_seq

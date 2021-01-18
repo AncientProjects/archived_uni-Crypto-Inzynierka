@@ -7,21 +7,26 @@ tf = tensorflow
 keras = tf.keras
 
 
-class LSTMMultiOutputModel(BaseModel):
+class LSTMSingleOutputModel3(BaseModel):
     def __init__(self, config):
-        super(LSTMMultiOutputModel, self).__init__(config)
+        super(LSTMSingleOutputModel3, self).__init__(config)
         self.build_model()
 
     def build_model(self):
         self.model = tf.keras.models.Sequential()
-        self.model.add(tf.keras.layers.LSTM(100, input_shape=(self.window_size, 1)))
-        self.model.add(tf.keras.layers.Dropout(0.1))
-        # self.model.add(tf.keras.layers.LSTM(10, input_shape=(self.window_size, 1)))
-        self.model.add(tf.keras.layers.Dense(self.sequence_size))
+        self.model.add(
+            tf.keras.layers.LSTM(80, input_shape=(self.window_size, 1), activation='relu', return_sequences=True))
+        self.model.add(tf.keras.layers.LSTM(40, activation='relu'))
+        self.model.add(tf.keras.layers.Dropout(0.2))
+        self.model.add(tf.keras.layers.Dense(self.sequence_size, activation='relu'))
+        # self.model.add(tf.keras.layers.Lambda(lambda x: x * 200.0))
 
         self.model.compile(
+            # loss=keras.losses.Huber(),
             loss='mse',
             optimizer=self.config.model.optimizer,
+            # optimizer=keras.optimizers.SGD(lr=1e-8, momentum=0.9),
+            # optimizer=keras.optimizers.Adam(learning_rate=self.learning_rate, epsilon=1e-8),
             metrics=['mae'],
         )
         print(self.model.summary())

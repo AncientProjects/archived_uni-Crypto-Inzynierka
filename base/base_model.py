@@ -1,6 +1,5 @@
 class BaseModel(object):
-    def __init__(self, train_data, config):
-        self.train_data = train_data
+    def __init__(self, config):
         self.config = config
         self.window_size = self.config.data_loader.window_size
         self.learning_rate = self.config.model.learning_rate

@@ -5,19 +5,18 @@
   },
   "data_loader": {
     "name": "lstm_single_output_data_loader.LSTMSingleOutputDataLoader",
-    "window_size": 10,
+    "window_size": 64,
     "sequences": 1,
     "test_len": 100,
-    "k_fold": 5,
+    "k_fold": 10,
     "recursive": false
   },
   "model": {
-    "name": "lstm_single_output_model.LSTMSingleOutputModel",
+    "name": "lstm_single_output_model_m3.LSTMSingleOutputModelM3",
     "learning_rate": 1e-8,
     "momentum": 0.9,
     "optimizer": "adam",
-    "load_model_path": "experiments/2021-01-15/lstm_single_output_config/checkpoints/lstm_single_output_config-273-0.00024.hdf5",
-    "load_model_path_2d": "experiments/2021-01-17/lstm_single_output_config/checkpoints/lstm_single_output_config-291-0.00029.hdf5"
+    "load_model_path": "experiments/2020-12-13/lstm_single_output_config/checkpoints/lstm_single_output_config-118-0.01428.hdf5"
   },
   "trainer": {
     "name": "lstm_trainer.LSTMTrainer",

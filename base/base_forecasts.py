@@ -6,8 +6,8 @@ class BaseForecasts(object):
         self.window_size = self.config.data_loader.window_size
         self.sequence_size = self.config.data_loader.sequences
 
-    def forecast_with_model(self):
+    def forecast(self, test_raw, test_data, i):
         raise NotImplementedError
 
-    def forecast_without_model(self):
+    def forecast_without_model(self, test_raw, i):
         raise NotImplementedError

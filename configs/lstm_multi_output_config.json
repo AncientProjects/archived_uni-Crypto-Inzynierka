@@ -7,21 +7,27 @@
     "name": "lstm_single_output_data_loader.LSTMSingleOutputDataLoader",
     "window_size": 10,
     "sequences": 5,
-    "test_len": 100
+    "test_len": 100,
+    "k_fold": 5,
+    "recursive": false
   },
   "model": {
     "name": "lstm_multi_output_model.LSTMMultiOutputModel",
     "learning_rate": 1e-4,
     "momentum": 0.85,
     "optimizer": "adam",
-    "load_model_path": "experiments/2020-12-09/experimental_config/checkpoints/experimental_config-502-0.01410.hdf5"
+    "load_model_path": "experiments/2021-01-10/lstm_multi_output_config/checkpoints/lstm_multi_output_config-1069-0.00084.hdf5"
   },
-  "trainer":{
-    "name": "experimental_trainer.ExperimentalTrainer",
-    "num_epochs": 4000,
-    "batch_size": 32,
+  "trainer": {
+    "name": "lstm_trainer.LSTMTrainer",
+    "num_epochs": 100,
+    "batch_size": 256,
     "validation_split": 0.1,
-    "verbose_training": true
+    "verbose_training": true,
+    "early_stopping": true,
+    "lr_scheduler": false,
+    "model_checkpoint": false,
+    "tensorboard": false
   },
   "callbacks": {
     "checkpoint_monitor": "val_loss",
@@ -33,6 +39,6 @@
     "early_stopping_patience": 100
   },
   "forecasts": {
-    "name": "experimental_forecasts.ExperimentalForecasts"
+    "name": "lstm_multi_output_forecasts.LSTMMultiOutputForecasts"
   }
 }

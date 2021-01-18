@@ -15,6 +15,17 @@ def get_args():
         metavar='M',
         default='None',
         help='Mode can be train or forecast')
+    arg_parser.add_argument(
+        '-cb', '--callbacks',
+        dest='callbacks',
+        metavar='CB',
+        default='None',
+        help='Change callbacks used')
+    arg_parser.add_argument(
+        '-d', '--dataset',
+        dest='dataset',
+        metavar='D',
+        default='1',
+        help='Choose dataset; 1 - minute timestep, 2 - day timestep')
     args = arg_parser.parse_args()
     return args
-

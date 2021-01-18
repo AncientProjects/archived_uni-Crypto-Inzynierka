@@ -1,0 +1,17 @@
+{
+  "exp": {
+    "name": "lstm_single_output_config",
+    "type": "partial"
+  },
+  "data_loader": {
+    "name": "lstm_single_output_data_loader.LSTMSingleOutputDataLoader",
+    "window_size": 1,
+    "sequences": 1,
+    "test_len": 100,
+    "k_fold": 5,
+    "recursive": false
+  },
+  "forecasts": {
+    "name": "naive_forecasts.NaiveForecasts"
+  }
+}

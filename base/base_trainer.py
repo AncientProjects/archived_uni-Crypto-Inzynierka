@@ -1,8 +1,7 @@
 class BaseTrain(object):
-    def __init__(self, model, train_data, config):
+    def __init__(self, model, config):
         self.model = model
-        self.train_data = train_data
         self.config = config
 
-    def train(self):
+    def train(self, train_data, test_data):
         raise NotImplementedError
