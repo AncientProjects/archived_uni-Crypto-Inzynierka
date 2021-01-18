@@ -1,1 +1,1 @@
-# CryptoIn-ynierka
+# Crypto Inżynierka
